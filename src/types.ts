@@ -1,27 +1,42 @@
-export namespace Filter {
-    export enum QueryParamKeys {
-        Page = "page",
-        PerPage = "perPage",
-        OrderBy = "orderBy",
-        OrderDir = "orderType",
-        Search = "search",
-        SearchFields = "searchFields",
-    }
+import { AxiosInstance } from "axios";
 
-    export enum OrderDirection {
-        Ascending = "asc",
-        Descending = "desc",
+export type ApiClient = AxiosInstance;
+
+export namespace Filter {
+    export type Pagination = {
+        page: number;
+        perPage: number;
+    };
+
+    export namespace Search {
+        // TODO: To be completed
+        export enum Operator {
+            Exact = "=",
+            Like = "like",
+        }
+        export type Item = {
+            field: string;
+            value: string | string[];
+            operator?: Operator;
+        };
     }
 }
 
+export type PaginatorMeta = {
+    current_page: number;
+    last_page: number;
+    from: number;
+    to: number;
+    total: number;
+    per_page: number;
+};
+
 export type Paginator<T> = {
     data: T[];
-    meta: {
-        current_page: number;
-        last_page: number;
-        from: number;
-        to: number;
-        total: number;
-        per_page: number;
-    };
+    meta: PaginatorMeta;
+};
+
+export type QueryParams = {
+    pagination?: Filter.Pagination;
+    search?: Filter.Search.Item[] | string;
 };
