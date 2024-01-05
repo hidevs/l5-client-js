@@ -9,15 +9,10 @@ export namespace Filter {
     };
 
     export namespace Search {
-        // TODO: To be completed
-        export enum Operator {
-            Exact = "=",
-            Like = "like",
-        }
         export type Item = {
             field: string;
             value: string | string[];
-            operator?: Operator;
+            operator?: "=" | ">" | "<" | ">=" | "<=" | "like" | "ilike" | "in" | "between";
         };
     }
 }
