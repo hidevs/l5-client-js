@@ -6,6 +6,7 @@ const api = new L5Client('http://localhost:8000/api')
 
 api.list('users', {
     pagination: {page: 1, perPage: 20},
+    filter: ["name", "email", "created_at"]
     sort: {
         name: "asc",
         created_at: "desc"

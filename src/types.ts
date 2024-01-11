@@ -40,4 +40,5 @@ export type QueryParams = {
     pagination?: Filter.Pagination;
     search?: Filter.Search.Item[] | string;
     sort?: Filter.SortItem;
+    filter?: string[]
 };
