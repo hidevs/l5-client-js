@@ -4,7 +4,9 @@ export type ApiClient = AxiosInstance;
 
 export namespace Filter {
 
-    export type SortDirection = "asc" | "desc"
+    export type SortItem = {
+        [column: string]: "asc" | "desc"
+    }
 
     export type Pagination = {
         page: number;
@@ -37,5 +39,5 @@ export type Paginator<T> = {
 export type QueryParams = {
     pagination?: Filter.Pagination;
     search?: Filter.Search.Item[] | string;
-    sortedBy?: Filter.SortDirection
+    sort?: Filter.SortItem;
 };

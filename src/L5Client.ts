@@ -17,13 +17,29 @@ export default class L5Client {
     }
 
     private buildQueryParams(queryParams: QueryParams) {
-        const { pagination, search, sortedBy } = queryParams;
+        const { pagination, search, sort } = queryParams;
 
         return {
-            sortedBy,
             ...pagination,
+            ...this.buildSortQueryParams(sort),
             ...this.buildSearchQueryParams(search),
         };
+    }
+
+    private buildSortQueryParams(sort: QueryParams["sort"]) {
+
+        if (typeof sort === "undefined") {
+            return {};
+        }
+
+        if (sort.constructor === Object) {
+            return {
+                sortedBy: Object.values(sort).join(";"),
+                orderBy: Object.keys(sort).join(";"),
+            };
+        }
+
+        return { sort };
     }
 
     private buildSearchQueryParams(search: QueryParams["search"]) {
