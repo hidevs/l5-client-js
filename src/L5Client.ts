@@ -17,9 +17,10 @@ export default class L5Client {
     }
 
     private buildQueryParams(queryParams: QueryParams) {
-        const { pagination, search } = queryParams;
+        const { pagination, search, sortedBy } = queryParams;
 
         return {
+            sortedBy,
             ...pagination,
             ...this.buildSearchQueryParams(search),
         };
