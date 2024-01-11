@@ -12,7 +12,8 @@ api.list('users', {
         created_at: "desc"
     },
     search: [
-        {field: 'post.title', operator: 'like', value: 'today'},
+        {field: 'name', operator: 'like', value: 'JalalLinuX'},
+        {field: 'post.title', operator: 'like', value: 'instagram'},
         {field: 'post.likes_count', operator: '>', value: '1000'},
     ]
 })
