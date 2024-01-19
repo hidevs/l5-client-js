@@ -1,5 +1,5 @@
-import { ApiClient, QueryParams, Paginator } from "./types";
-import axios from "axios";
+import type { ApiClient, QueryParams, Paginator } from "./types";
+import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 
 export default class L5Client {
     private client: ApiClient;
@@ -7,13 +7,29 @@ export default class L5Client {
 
     constructor(baseUrl: string) {
         this.baseUrl = baseUrl.replace(/^\/?|\/?$/g, "");
-        this.client = axios.create({ baseURL: this.baseUrl });
+        this.client = axios.create({ baseURL: this.baseUrl, headers: {Accept: 'application/json'} });
     }
 
-    async list<T>(route: string, queryParams: QueryParams) {
+    async paginate<T>(route: string, queryParams: QueryParams) {
         const params = this.buildQueryParams(queryParams);
         const { data } = await this.client.get<Paginator<T>>(route, { params });
         return data;
+    }
+
+    async get<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
+        return this.client.get<T, R, D>(url, config)
+    }
+
+    async post<T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R> {
+        return this.client.post<T, R, D>(url, data, config)
+    }
+
+    async put<T = any, R = AxiosResponse<T>, D = any>(url: string, data?: D, config?: AxiosRequestConfig<D>): Promise<R> {
+        return this.client.put<T, R, D>(url, data, config)
+    }
+
+    async delete<T = any, R = AxiosResponse<T>, D = any>(url: string, config?: AxiosRequestConfig<D>): Promise<R> {
+        return this.client.delete<T, R, D>(url, config)
     }
 
     private buildQueryParams(queryParams: QueryParams) {
