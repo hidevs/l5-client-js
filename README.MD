@@ -2,6 +2,7 @@
 
 
 ```js
+import {L5Client} from "l5-client-ts";
 const api = new L5Client('http://localhost:8000/api')
 
 api.paginate('users', {
