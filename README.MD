@@ -4,7 +4,7 @@
 ```js
 const api = new L5Client('http://localhost:8000/api')
 
-api.list('users', {
+api.paginate('users', {
     pagination: {page: 1, perPage: 20},
     filter: ["name", "email", "created_at"],
     sort: {
