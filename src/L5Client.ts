@@ -1,7 +1,7 @@
 import type { ApiClient, QueryParams, Paginator } from "./types";
 import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
 
-export default class L5Client {
+export class L5Client {
     private client: ApiClient;
     private baseUrl: string;
 
