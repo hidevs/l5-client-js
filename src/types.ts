@@ -14,6 +14,7 @@ export namespace Filter {
     };
 
     export namespace Search {
+        export type Join = "and" | "or";
         export type Item = {
             field: string;
             value: string | string[];
@@ -39,6 +40,8 @@ export type Paginator<T> = {
 export type QueryParams = {
     pagination?: Filter.Pagination;
     search?: Filter.Search.Item[] | string;
+    searchJoin?: Filter.Search.Join;
     sort?: Filter.SortItem;
+    relations?: string[];
     filter?: string[];
 };
