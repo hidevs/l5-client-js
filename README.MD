@@ -1,6 +1,6 @@
 ## Usage
 ```ts
-import { L5Client } from "l5-client";
+import { L5Client } from 'l5-client';
 
 const api = new L5Client('http://localhost:8000/api')
 
@@ -12,11 +12,13 @@ interface User {
 
 api.paginate<User>('users', {
     pagination: {page: 1, perPage: 20},
-    filter: ["name", "email", "created_at"],
+    filter: ['name', 'email', 'created_at'],
     sort: {
-        name: "asc",
-        created_at: "desc"
+        name: 'asc',
+        created_at: 'desc'
     },
+    relations: ['post'],
+    searchJoin: 'and',
     search: [
         {field: 'name', operator: 'like', value: 'JalalLinuX'},
         {field: 'post.title', operator: 'like', value: 'instagram'},
