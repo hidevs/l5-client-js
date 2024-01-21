@@ -9,7 +9,7 @@
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/hidevs/l5-client.git"
+      "url": "git+https://github.com/hidevs/l5-client-js.git"
     },
     "keywords": [
       "HiDevs",
@@ -26,7 +26,7 @@
         "axios": "^1.6.4"
     },
     "bugs": {
-      "url": "https://github.com/hidevs/l5-client/issues"
+      "url": "https://github.com/hidevs/l5-client-js/issues"
     },
-    "homepage": "https://github.com/hidevs/l5-client#readme"
+    "homepage": "https://github.com/hidevs/l5-client-js#readme"
   }
