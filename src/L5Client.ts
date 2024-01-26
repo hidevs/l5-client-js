@@ -10,7 +10,7 @@ export class L5Client {
         this.client = axios.create({ baseURL: this.baseUrl, headers: {Accept: 'application/json'} });
     }
 
-    async paginate<T>(route: string, queryParams: QueryParams) {
+    async paginate<T>(route: string, queryParams: QueryParams): Promise<Paginator<T>> {
         const params = this.buildQueryParams(queryParams);
         const { data } = await this.client.get<Paginator<T>>(route, { params });
         return data;
@@ -36,10 +36,10 @@ export class L5Client {
         const { pagination, search, sort, filter, searchJoin, relations } = queryParams;
 
         return {
-            filter,
-            searchJoin,
-            with: relations,
             ...pagination,
+            searchJoin,
+            filter: filter?.join(','),
+            with: relations?.join(','),
             ...this.buildSortQueryParams(sort),
             ...this.buildSearchQueryParams(search),
         };
