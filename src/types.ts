@@ -2,26 +2,22 @@ import { AxiosInstance } from "axios";
 
 export type ApiClient = AxiosInstance;
 
-export namespace Filter {
-
-    export type SortItem = {
-        [column: string]: "asc" | "desc"
-    }
-
-    export type Pagination = {
-        page: number;
-        perPage: number;
-    };
-
-    export namespace Search {
-        export type Join = "and" | "or";
-        export type Item = {
-            field: string;
-            value: string | string[];
-            operator?: "=" | ">" | "<" | ">=" | "<=" | "like" | "ilike" | "in" | "between";
-        };
-    }
+export type FilterSortItem = {
+    [column: string]: "asc" | "desc"
 }
+
+export type FilterPagination = {
+    page: number;
+    perPage: number;
+};
+
+export type FilterSearchJoin = "and" | "or";
+
+export type FilterSearchItem = {
+    field: string;
+    value: string | string[];
+    operator?: "=" | ">" | "<" | ">=" | "<=" | "like" | "ilike" | "in" | "between";
+};
 
 export type PaginatorMeta = {
     current_page: number;
@@ -38,10 +34,10 @@ export type Paginator<T> = {
 };
 
 export type QueryParams = {
-    pagination?: Filter.Pagination;
-    search?: Filter.Search.Item[] | string;
-    searchJoin?: Filter.Search.Join;
-    sort?: Filter.SortItem;
+    pagination?: FilterPagination;
+    search?: FilterSearchItem[] | string;
+    searchJoin?: FilterSearchJoin;
+    sort?: FilterSortItem;
     relations?: string[];
     filter?: string[];
 };

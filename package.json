@@ -1,6 +1,6 @@
 {
     "name": "l5-client",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "description": "Integrate with laravel https://github.com/andersao/l5-repository package",
     "main": "src/index.ts",
     "scripts": {
