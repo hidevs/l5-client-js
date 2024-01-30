@@ -10,6 +10,12 @@ export class L5Client {
         this.client = axios.create({ baseURL: this.baseUrl, headers: {Accept: 'application/json'} });
     }
 
+    async all<T>(route: string, queryParams: Omit<QueryParams, "pagination">): Promise<T[]> {
+        const params = this.buildQueryParams(queryParams);
+        const { data } = await this.client.get<T[]>(route, { params });
+        return data;
+    }
+
     async paginate<T>(route: string, queryParams: QueryParams): Promise<Paginator<T>> {
         const params = this.buildQueryParams(queryParams);
         const { data } = await this.client.get<Paginator<T>>(route, { params });
