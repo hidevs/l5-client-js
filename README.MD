@@ -10,6 +10,21 @@ interface User {
     created_at: string;
 }
 
+api.all<User>('users', {
+    filter: ['name', 'email', 'created_at'],
+    sort: {
+        name: 'asc',
+        created_at: 'desc'
+    },
+    relations: ['post'],
+    searchJoin: 'and',
+    search: [
+        {field: 'name', operator: 'like', value: 'JalalLinuX'},
+        {field: 'post.title', operator: 'like', value: 'instagram'},
+        {field: 'post.likes_count', operator: '>', value: '1000'},
+    ]
+})
+
 api.paginate<User>('users', {
     pagination: {page: 1, perPage: 20},
     filter: ['name', 'email', 'created_at'],
@@ -29,7 +44,9 @@ api.paginate<User>('users', {
 
 ## Methods
 ```ts
-api.paginate(route: string, queryParams: QueryParams)
+api.all(route: string, queryParams: Omit<QueryParams, "pagination">): T[]
+
+api.paginate(route: string, queryParams: QueryParams): Paginator<T>
 
 api.get(url: string, config?: AxiosRequestConfig<D>)
 
