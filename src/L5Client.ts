@@ -1,13 +1,15 @@
 import type { ApiClient, QueryParams, Paginator } from "./types";
-import axios, { type AxiosRequestConfig, type AxiosResponse } from "axios";
+import axios, { type AxiosRequestConfig, type AxiosResponse, CreateAxiosDefaults } from "axios";
 
 export class L5Client {
     private client: ApiClient;
     private baseUrl: string;
 
-    constructor(baseUrl: string) {
+    constructor(baseUrl: string, config?: CreateAxiosDefaults) {
         this.baseUrl = baseUrl.replace(/^\/?|\/?$/g, "");
-        this.client = axios.create({ baseURL: this.baseUrl, headers: {Accept: 'application/json'} });
+        this.client = axios.create({...config, baseURL: this.baseUrl});
+        console.log(this.client);
+        
     }
 
     async all<T>(route: string, queryParams: Omit<QueryParams, "pagination">): Promise<T[]> {
