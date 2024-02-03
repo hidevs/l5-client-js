@@ -1,3 +1,12 @@
+## Install
+```shell
+npm install l5-client
+
+pnpm install l5-client
+
+yarn add l5-client
+```
+
 ## Usage
 ```ts
 import { L5Client } from 'l5-client';
