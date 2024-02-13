@@ -8,8 +8,6 @@ export class L5Client {
     constructor(baseUrl: string, config?: CreateAxiosDefaults) {
         this.baseUrl = baseUrl.replace(/^\/?|\/?$/g, "");
         this.client = axios.create({...config, baseURL: this.baseUrl});
-        console.log(this.client);
-        
     }
 
     async all<T>(route: string, queryParams: Omit<QueryParams, "pagination">): Promise<T[]> {
