@@ -38,7 +38,7 @@ export class L5Client {
         return this.client.delete<T, R, D>(url, config)
     }
 
-    private buildQueryParams(queryParams: QueryParams) {
+    buildQueryParams(queryParams: QueryParams) {
         const { pagination, search, sort, filter, searchJoin, relations } = queryParams;
 
         return {
