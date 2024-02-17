@@ -75,7 +75,7 @@ export class L5Client {
         if (Array.isArray(search)) {
             return {
                 search: search.map(({ field, value }) => `${field}:${typeof value === "string" ? value : value.join(",")}`).join(";"),
-                searchFields: search.map(({ field, operator }) => `${field}:${operator}`).join(";"),
+                searchFields: search.map(({ field, operator }) => (typeof operator === "undefined") ? null : `${field}:${operator}`).filter(n => n).join(";"),
             };
         }
 
